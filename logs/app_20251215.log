@@ -1,0 +1,45 @@
+2025-12-15 23:00:59 - INFO - get_engine:109 - Creating database engine: user=None, host=None, db=None
+2025-12-15 23:00:59 - ERROR - order_details:324 - Database error fetching tasks: Missing database connection parameters. Set DB_HOST, DB_NAME (or PGHOST, PGDATABASE for Databricks Apps)
+2025-12-15 23:02:29 - INFO - get_engine:110 - Creating database engine: user=None, host=None, db=None
+2025-12-15 23:02:29 - ERROR - order_details:325 - Database error fetching tasks: Missing database connection parameters. Set DB_HOST, DB_NAME (or PGHOST, PGDATABASE for Databricks Apps)
+2025-12-15 23:16:24 - INFO - get_engine:111 - Creating database engine: user=nivethan.venkatachalam@diggibyte.com, host=instance-e1c07201-6c30-4306-bbe0-f40d8ebcf2e4.database.cloud.databricks.com, db=databricks_postgres
+2025-12-15 23:16:24 - INFO - _get_workspace_client:54 - WorkspaceClient initialized with auto-authentication
+2025-12-15 23:16:25 - ERROR - _generate_oauth_token:78 - Failed to generate OAuth token: Database instance is not found.
+2025-12-15 23:16:25 - ERROR - order_details:326 - Database error fetching tasks: Database instance is not found.
+2025-12-15 23:17:51 - INFO - get_engine:111 - Creating database engine: user=nivethan.venkatachalam@diggibyte.com, host=instance-e1c07201-6c30-4306-bbe0-f40d8ebcf2e4.database.cloud.databricks.com, db=databricks_postgres
+2025-12-15 23:17:51 - ERROR - _generate_oauth_token:78 - Failed to generate OAuth token: Database instance is not found.
+2025-12-15 23:17:51 - ERROR - order_details:326 - Database error fetching tasks: Database instance is not found.
+2025-12-15 23:18:17 - INFO - get_engine:111 - Creating database engine: user=anuj.sen@diggibyte.com, host=instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net, db=databricks_postgres
+2025-12-15 23:18:17 - INFO - _get_workspace_client:54 - WorkspaceClient initialized with auto-authentication
+2025-12-15 23:18:17 - ERROR - _generate_oauth_token:78 - Failed to generate OAuth token: Database instance is not found.
+2025-12-15 23:18:17 - ERROR - order_details:326 - Database error fetching tasks: Database instance is not found.
+2025-12-15 23:24:40 - INFO - get_engine:111 - Creating database engine: user=anuj.sen@diggibyte.com, host=instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net, db=databricks_postgres
+2025-12-15 23:24:42 - INFO - _get_workspace_client:54 - WorkspaceClient initialized with auto-authentication
+2025-12-15 23:24:43 - ERROR - _generate_oauth_token:78 - Failed to generate OAuth token: Database instance is not found.
+2025-12-15 23:24:43 - ERROR - order_details:326 - Database error fetching tasks: Database instance is not found.
+2025-12-15 23:25:42 - INFO - get_engine:111 - Creating database engine: user=anuj.sen@diggibyte.com, host=instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net, db=databricks_postgres
+2025-12-15 23:25:42 - INFO - _get_workspace_client:50 - WorkspaceClient initialized with PAT authentication
+2025-12-15 23:25:42 - ERROR - _generate_oauth_token:78 - Failed to generate OAuth token: unable to parse response. This is likely a bug in the Databricks SDK for Python or the underlying API. Please report this issue with the following debugging information to the SDK issue tracker at https://github.com/databricks/databricks-sdk-go/issues. Request log:```POST /api/2.0/database/credentials
+> {
+>   "instance_names": [
+>     "backend-database"
+>   ],
+>   "request_id": "2f7db7e9-d5a2-4eb1-9f4e-d3acdc7dfeeb"
+> }
+< 403 Forbidden
+< Invalid scope```
+2025-12-15 23:25:42 - ERROR - order_details:326 - Database error fetching tasks: unable to parse response. This is likely a bug in the Databricks SDK for Python or the underlying API. Please report this issue with the following debugging information to the SDK issue tracker at https://github.com/databricks/databricks-sdk-go/issues. Request log:```POST /api/2.0/database/credentials
+> {
+>   "instance_names": [
+>     "backend-database"
+>   ],
+>   "request_id": "2f7db7e9-d5a2-4eb1-9f4e-d3acdc7dfeeb"
+> }
+< 403 Forbidden
+< Invalid scope```
+2025-12-15 23:27:44 - INFO - get_engine:111 - Creating database engine: user=anuj.sen@diggibyte.com, host=instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net, db=databricks_postgres
+2025-12-15 23:27:45 - INFO - get_engine:148 - Database engine created successfully with OAuth authentication
+2025-12-15 23:35:04 - INFO - get_engine:111 - Creating database engine: user=anuj.sen@diggibyte.com, host=instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net, db=databricks_postgres
+2025-12-15 23:35:04 - INFO - get_engine:148 - Database engine created successfully with OAuth authentication
+2025-12-15 23:53:28 - INFO - get_engine:115 - Creating database engine: user=anuj.sen@diggibyte.com, host=instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net, db=databricks_postgres
+2025-12-15 23:53:28 - INFO - get_engine:152 - Database engine created successfully with OAuth authentication

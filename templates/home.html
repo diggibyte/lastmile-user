@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% set title = "Home · Epiroc Portal" %}
+
+{% block content %}
+<section class="card">
+  <h1 class="h1">Welcome, {{ username }}</h1>
+  <p class="muted">
+    Your central hub for managing Orders, maintenance, safety, and documentation.
+  </p>
+
+  <div class="grid">
+    <div class="tile">
+      <a class="tile-title" href="{{ url_for('my_orders') }}" style="color: inherit; text-decoration: none;">
+        Orders
+      </a>
+      <div class="tile-body">Order Status and ETA for Last mile </div>
+    </div>
+
+    <div class="tile">
+      <div class="tile-title">Maintenance</div>
+      <div class="tile-body">Product, inspections, and equipment lifecycle.</div>
+    </div>
+
+    <div class="tile">
+      <div class="tile-title">Safety</div>
+      <div class="tile-body">Incident reporting, permits, and compliance checks.</div>
+    </div>
+
+    <div class="tile">
+      <div class="tile-title">Documents</div>
+      <div class="tile-body">Controlled procedures, templates, and downloads.</div>
+    </div>
+  </div>
+</section>
+{% endblock %}

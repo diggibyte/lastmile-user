@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% set title = "Order Details · Epiroc Portal" %}
+
+{% block head_extra %}
+  {{ super() }}
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  >
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const mapEl = document.getElementById("order-map");
+      if (!mapEl || typeof L === "undefined") return;
+
+      const events = {{ events|tojson }};
+      const coords = events
+        .map(event => {
+          const lat = Number(event.latitude);
+          const lng = Number(event.longitute ?? event.longitude);
+          if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+          return { lat, lng, status: event.status, city: event.city_location, event_ts: event.actual_event_ts };
+        })
+        .filter(Boolean);
+
+      if (!coords.length) {
+        mapEl.classList.add("order-map--empty");
+        mapEl.textContent = "No location checkpoints available for this order yet.";
+        return;
+      }
+
+      const map = L.map(mapEl);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "&copy; OpenStreetMap contributors"
+      }).addTo(map);
+
+      const path = coords.map(point => [point.lat, point.lng]);
+      const line = L.polyline(path, { color: "#ffd200", weight: 4, opacity: 0.9 }).addTo(map);
+      map.fitBounds(line.getBounds(), { padding: [20, 20] });
+
+      coords.forEach((point, index) => {
+        const label = point.city || `Checkpoint ${index + 1}`;
+        const event_ts = point.event_ts ;
+        const marker = L.marker([point.lat, point.lng]).addTo(map);
+        marker.bindPopup(`<strong>${point.status}</strong><br>${label}<br>${event_ts}`);
+      });
+    });
+  </script>
+{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h1 class="h1">Order Details</h1>
+
+  <!-- Order summary -->
+  <section class="section order-summary">
+    <h2 class="h2">Summary</h2>
+    <div class="summary-grid">
+      <div class="summary-item">
+        <span class="summary-label">Order ID</span>
+        <span class="summary-value">{{ order.id }}</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">Status</span>
+        <span class="summary-badge status-{{ order.status|lower|replace(' ', '-') }}">{{ order.status }}</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">Estimated Arrival</span>
+        <span class="summary-value">{{ order.estimated_eta }}</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">ETA Confidence</span>
+        <span class="summary-value">{{ order.eta_confidence }}</span>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Timeline + Map -->
+  <section class="section order-progress">
+    <div class="order-progress-grid">
+      <div class="order-progress-panel">
+        <h2 class="h2">Order Timeline</h2>
+        <div class="scroll-section">
+          <ol class="timeline">
+            {% for e in events %}
+            {% set status_class = e.status|lower|replace(' ', '-') %}
+            {% set has_actual_ts = e.actual_event_ts and e.actual_event_ts != "null" %}
+            {% set display_ts = e.actual_event_ts if has_actual_ts else e.estimated_event_ts %}
+            <li class="timeline-item status-{{ status_class }}">
+              <div class="timeline-meta">
+                <span class="timeline-status">{{ (e.status.replace("_", " ") | title) }}</span>
+                <span class="timeline-time {{ '' if has_actual_ts else 'timeline-time-disabled' }}">
+                  {{ display_ts }}
+                </span>
+              </div>
+              <div class="timeline-label">{{ e.notes }}</div>
+              {% if e.city_location %}
+              <div class="timeline-location">{{ e.city_location }}</div>
+              {% endif %}
+            </li>
+            {% endfor %}
+            {% if events|length == 0 %}
+            <li class="timeline-item muted">No events found for this order.</li>
+            {% endif %}
+          </ol>
+        </div>
+      </div>
+      <div class="order-progress-panel">
+        <h2 class="h2">Route Map</h2>
+        <div id="order-map" class="order-map" aria-label="Shipment path map"></div>
+        <p class="map-hint">Markers trace available latitude/longitude checkpoints for this shipment.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="actions">
+    <a class="btn btn-secondary" href="{{ url_for('my_orders') }}">
+      <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M10 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M4 12h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      Back to My Orders
+    </a>
+    <button type="button" class="btn btn-secondary">
+      <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="4" y="6" width="16" height="12" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+        <path d="M4 8l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      Subscribe to Event Emails
+    </button>
+    <button type="button" class="btn btn-secondary">
+      <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 5h12a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-5l-4 4v-4H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      Message Operations
+    </button>
+  </div>
+</section>
+
+
+
+{% endblock %}

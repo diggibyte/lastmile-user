@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% set title = "My Orders · Epiroc Portal" %}
+
+{% block content %}
+<section class="card">
+  <h1 class="h1">My Orders</h1>
+  <p class="muted">Overview of your orders and Status</p>
+
+
+  <!-- 3. Orders Placed -->
+  <section class="section">
+
+    <div class="table-wrapper">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Order Placed Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+          <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.placed_date }}</td>
+            <td>{{ order.status }}</td>
+            <td>
+              <a class="btn btn-tble" href="{{ url_for('order_details', order_id=order.id) }}">
+                View Details
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+          {% if orders|length == 0 %}
+          <tr>
+            <td colspan="4" class="muted">You have no orders yet.</td>
+          </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+{% endblock %}

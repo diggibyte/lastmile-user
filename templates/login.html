@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% set title = "Login · Epiroc Portal" %}
+
+{% block content %}
+<section class="card auth-card">
+  <h1 class="h1">Sign in</h1>
+  <p class="muted">Use your portal credentials to continue.</p>
+
+  <form method="post" class="form">
+    <label class="label" for="username">Username</label>
+    <input class="input" id="username" name="username" type="text" autocomplete="username" required />
+
+    <label class="label" for="password">Password</label>
+    <input class="input" id="password" name="password" type="password" autocomplete="current-password" required />
+
+    <button class="btn btn-primary" type="submit">Login</button>
+
+    <div class="helper">
+     
+  </form>
+</section>
+{% endblock %}
