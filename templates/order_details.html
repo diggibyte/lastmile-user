@@ -83,6 +83,8 @@
         <span class="summary-label">ETA Confidence</span>
         <span class="summary-value">{{ order.eta_confidence }}</span>
       </div>
+     
+     
     </div>
   </section>
 
@@ -122,6 +124,18 @@
         <h2 class="h2">Route Map</h2>
         <div id="order-map" class="order-map" aria-label="Shipment path map"></div>
         <p class="map-hint">Markers trace available latitude/longitude checkpoints for this shipment.</p>
+        {% set traffic_delay = order.traffic_status | float %}
+        {% if traffic_delay < 1 %}
+          {% set traffic_class = "traffic-delay--low" %}
+        {% elif traffic_delay < 2 %}
+          {% set traffic_class = "traffic-delay--medium" %}
+        {% else %}
+          {% set traffic_class = "traffic-delay--high" %}
+        {% endif %}
+        <div class="summary-item summary-item--traffic">
+          <span class="summary-label">Realtime  Traffic Delay</span>
+          <span class="summary-value traffic-delay {{ traffic_class }}">{{ traffic_delay }} Hours</span>
+        </div>
       </div>
     </div>
   </section>

@@ -1,0 +1,37 @@
+2025-12-16 01:08:40 - INFO - get_engine:115 - Creating database engine: user=anuj.sen@diggibyte.com, host=instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net, db=databricks_postgres
+2025-12-16 01:08:40 - INFO - get_engine:152 - Database engine created successfully with OAuth authentication
+2025-12-16 01:37:06 - INFO - get_engine:115 - Creating database engine: user=anuj.sen@diggibyte.com, host=instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net, db=databricks_postgres
+2025-12-16 01:37:06 - INFO - get_engine:152 - Database engine created successfully with OAuth authentication
+2025-12-16 01:39:50 - INFO - get_engine:115 - Creating database engine: user=anuj.sen@diggibyte.com, host=instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net, db=databricks_postgres
+2025-12-16 01:39:50 - INFO - get_engine:152 - Database engine created successfully with OAuth authentication
+2025-12-16 01:40:59 - INFO - get_engine:115 - Creating database engine: user=anuj.sen@diggibyte.com, host=instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net, db=databricks_postgres
+2025-12-16 01:40:59 - INFO - get_engine:152 - Database engine created successfully with OAuth authentication
+2025-12-16 01:43:07 - INFO - get_engine:115 - Creating database engine: user=anuj.sen@diggibyte.com, host=instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net, db=databricks_postgres
+2025-12-16 01:43:08 - INFO - get_engine:152 - Database engine created successfully with OAuth authentication
+2025-12-16 01:44:27 - INFO - get_engine:115 - Creating database engine: user=anuj.sen@diggibyte.com, host=instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net, db=databricks_postgres
+2025-12-16 01:44:28 - INFO - get_engine:152 - Database engine created successfully with OAuth authentication
+2025-12-16 01:50:24 - INFO - get_engine:116 - Creating database engine: user=anuj.sen@diggibyte.com, host=instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net, db=databricks_postgres
+2025-12-16 01:50:24 - INFO - get_engine:153 - Database engine created successfully with OAuth authentication
+2025-12-16 01:52:41 - INFO - get_engine:116 - Creating database engine: user=anuj.sen@diggibyte.com, host=instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net, db=databricks_postgres
+2025-12-16 01:52:41 - INFO - get_engine:153 - Database engine created successfully with OAuth authentication
+2025-12-16 02:08:11 - INFO - get_engine:116 - Creating database engine: user=anuj.sen@diggibyte.com, host=instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net, db=databricks_postgres
+2025-12-16 02:08:11 - INFO - get_engine:153 - Database engine created successfully with OAuth authentication
+2025-12-16 02:08:12 - ERROR - my_orders:293 - Database error fetching tasks: (psycopg2.OperationalError) connection to server at "instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net" (52.234.168.240), port 5432 failed: FATAL:  Invalid authorization for databricks identity login. Please use a valid databricks token to login as a databricks identity.
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-12-16 02:08:54 - ERROR - my_orders:293 - Database error fetching tasks: (psycopg2.OperationalError) connection to server at "instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net" (52.234.168.240), port 5432 failed: FATAL:  Invalid authorization for databricks identity login. Please use a valid databricks token to login as a databricks identity.
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-12-16 02:09:10 - ERROR - my_orders:293 - Database error fetching tasks: (psycopg2.OperationalError) connection to server at "instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net" (52.234.168.240), port 5432 failed: FATAL:  Invalid authorization for databricks identity login. Please use a valid databricks token to login as a databricks identity.
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-12-16 02:09:41 - ERROR - my_orders:293 - Database error fetching tasks: (psycopg2.OperationalError) connection to server at "instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net" (52.234.168.240), port 5432 failed: FATAL:  Invalid authorization for databricks identity login. Please use a valid databricks token to login as a databricks identity.
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-12-16 02:09:45 - ERROR - my_orders:293 - Database error fetching tasks: (psycopg2.OperationalError) connection to server at "instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net" (52.234.168.240), port 5432 failed: FATAL:  Invalid authorization for databricks identity login. Please use a valid databricks token to login as a databricks identity.
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-12-16 02:10:43 - INFO - get_engine:116 - Creating database engine: user=anuj.sen@diggibyte.com, host=instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net, db=databricks_postgres
+2025-12-16 02:10:43 - INFO - get_engine:153 - Database engine created successfully with OAuth authentication
+2025-12-16 02:17:43 - INFO - get_engine:116 - Creating database engine: user=anuj.sen@diggibyte.com, host=instance-3d8076e6-3884-4c74-b7ef-3fd539504f6c.database.azuredatabricks.net, db=databricks_postgres
+2025-12-16 02:17:43 - INFO - get_engine:153 - Database engine created successfully with OAuth authentication

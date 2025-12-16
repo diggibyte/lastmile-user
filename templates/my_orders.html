@@ -16,6 +16,7 @@
           <tr>
             <th>Order ID</th>
             <th>Order Placed Date</th>
+            <th>Product</th>
             <th>Status</th>
             <th>Action</th>
           </tr>
@@ -23,11 +24,26 @@
         <tbody>
           {% for order in orders %}
           <tr>
-            <td>{{ order.id }}</td>
+            <td>{{ order.order_id }}</td>
             <td>{{ order.placed_date }}</td>
+            <td>
+              <div class="order-product">
+                <img
+                  src="{{ url_for('static', filename='img/' ~ order.prod_id ~ '.png') }}"
+                  alt="{{ order.prod_id }}"
+                  class="order-product-img"
+                  loading="lazy"
+                >
+                <div class="order-product-info">
+                  {% if order.prod_id %}
+                  <div class="order-product-name">{{ order.prod_id }}</div>
+                  {% endif %}
+                </div>
+              </div>
+            </td>
             <td>{{ order.status }}</td>
             <td>
-              <a class="btn btn-tble" href="{{ url_for('order_details', order_id=order.id) }}">
+              <a class="btn btn-tble" href="{{ url_for('order_details', order_id=order.order_id) }}">
                 View Details
               </a>
             </td>
@@ -35,7 +51,7 @@
           {% endfor %}
           {% if orders|length == 0 %}
           <tr>
-            <td colspan="4" class="muted">You have no orders yet.</td>
+            <td colspan="5" class="muted">You have no orders yet.</td>
           </tr>
           {% endif %}
         </tbody>

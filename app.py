@@ -18,6 +18,7 @@ from datetime import datetime, date
 from decimal import Decimal
 from datetime import datetime, date
 from decimal import Decimal
+from traffic_query_helper import get_traffic_update
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-change-me")  # set env var in production
@@ -283,31 +284,35 @@ def _serialize_value(value):
 
 @app.route("/my-orders")
 def my_orders():
-    # Example data; replace with DB queries
-    products = [
-        {"name": "Drill X100", "category": "Drilling", "price": "$1,200", "in_stock": True},
-        {"name": "Loader L50", "category": "Loading", "price": "$18,500", "in_stock": False},
-        {"name": "Compressor C20", "category": "Air", "price": "$4,300", "in_stock": True},
-    ]
+    try:
+        with get_engine().connect() as conn:
+            rows = conn.execute(
+                text("select * from orders")
+            ).mappings().all()
+    except Exception as e:
+        logger.error(f"Database error fetching tasks: {str(e)}")
+        rows = []
 
-    recommendations = [
-        {"name": "Rock Drill RD90", "category": "Drilling", "price": "$2,900", "rating": 4.6},
-        {"name": "Ventilation Fan V10", "category": "Ventilation", "price": "$1,150", "rating": 4.3},
-        {"name": "Support Bolt SB30", "category": "Support", "price": "$12", "rating": 4.8},
-    ]
+    image_dir = Path(app.static_folder or "static") / "img"
+    available_images = {}
+    if image_dir.exists():
+        for image_path in image_dir.glob("*.*"):
+            if image_path.is_file():
+                available_images[image_path.stem.upper()] = image_path.name
 
-    orders = [
-        {"id": "ORD-1001", "placed_date": "2025-01-10", "status": "In Transit"},
-        {"id": "ORD-1002", "placed_date": "2025-01-12", "status": "Delivered"},
-        {"id": "ORD-1003", "placed_date": "2025-01-15", "status": "Placed"},
-    ]
+    fallback_image = "image.png"
+    orders = []
+    for row in rows:
+        order_data = dict(row)
+        product_id_value = order_data.get("product_id")
+        raw_code = str(product_id_value).strip() if product_id_value is not None else ""
+        normalized_code = raw_code.upper()
+        image_name = available_images.get(normalized_code, fallback_image)
+        order_data["product_code"] = raw_code or "N/A"
+        order_data["product_image"] = image_name
+        orders.append(order_data)
 
-    return render_template(
-        "my_orders.html",
-        products=products,
-        recommendations=recommendations,
-        orders=orders,
-    )
+    return render_template("my_orders.html", orders=orders)
 
 
 @app.route("/products")
@@ -322,11 +327,22 @@ def all_products():
 @app.route("/orders/<order_id>")
 def order_details(order_id):
     # Example order; normally load from DB
+    try:
+        with get_engine().connect() as conn:
+            order = conn.execute(
+                text(f"select * from orders where order_id = '{order_id}'")
+            ).fetchone()
+           
+    except Exception as e:
+        logger.error(f"Database error fetching tasks: {str(e)}")
+        order = []
+   
     order = {
-        "id": order_id,
-        "placed_date": "2025-01-10",
-        "status": "In Transit",
-        "total": "$23,400.00",
+        "id": order.order_id,
+        "placed_date": order.placed_date,
+        "status": order.status,
+        "total": f"${order.total_amount}",
+        "traffic_status": round(int(get_traffic_update(order.origin_latitude , order.origin_longitude,order.destination_latitude, order.destination_longitude)["traffic_delay_min"])/60,2)
     }
 
     # Timeline events loaded from file: data/orders/<order_id>.json
